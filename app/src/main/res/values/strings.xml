@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MensaApplication</string>
+    <string name="title_activity_main3">MainActivity3</string>
+
+
+    <string-array name="Mensa_names">
+        <item>Airport</item>
+        <item>AB-build</item>
+        <item>Neustat</item>
+    </string-array>
+
+</resources>
