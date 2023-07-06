@@ -34,8 +34,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // Set the URL for fetching mensa data
         url = "https://mensaappserver.onrender.com/mensas";
+
+        // Create a Volley request to fetch mensa data from the server
+
         StringRequest request = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
                 System.out.println("H");
             }
         });
+        // Set the retry policy for the request
+        //We had to set it to wait a lot because the server is slow :)
         request.setRetryPolicy(
                 new DefaultRetryPolicy(
                         500000,
@@ -65,9 +70,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
                 )
         );
+
+        // Add the request to the Volley request queue
+
         Volley.newRequestQueue(this).add(request);
     }
 
+    //Function that populates the recycler view using MensaAdapter
     private void recyclerViewMensa(){
         RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
 
@@ -85,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
             }
         });
 
+        //Add buttonClickListener to the mensa buttons
         MensaAdapter.OnButtonClickListener buttonClickListener = new MensaAdapter.OnButtonClickListener() {
             @Override
             public void onButtonClick(int position) {
@@ -110,14 +120,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         startActivity(intent);
     }
 
-    public void setUpMensaModels(){
-
-        /*String[] mensaNames = getResources().getStringArray(R.array.Mensa_names);
-        for (int i = 0; i < mensaNames.length; i++){
-            mensaModel.add(new MensaModel(mensaNames[i]));
-        }*/
-
-    }
 
     @Override
     public void onItemClick(int position) {

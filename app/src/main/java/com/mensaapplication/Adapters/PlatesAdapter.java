@@ -17,13 +17,21 @@ import com.mensaapplication.R;
 
 import java.util.List;
 
+/**
+
+ The PlatesAdapter class is a RecyclerView adapter used to display a list of Food plates.
+ It binds the data to the ViewHolder and handles click events on the plates.
+ */
 public class PlatesAdapter extends RecyclerView.Adapter<PlatesAdapter.ViewHolder>{
+    // PlatesAdapter is a RecyclerView adapter used to display a list of Food plates
+
     List<Food> plates;
     private OnButtonClickListener buttonClickListener;
     public PlatesAdapter(List<Food> plates) {
         this.plates = plates;
     }
 
+    // onCreateViewHolder method: Inflates the RecyclerView item layout
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,10 +43,16 @@ public class PlatesAdapter extends RecyclerView.Adapter<PlatesAdapter.ViewHolder
         void onButtonClick(int position);
     }
 
+    /**
+     * Sets an OnClickListener for the button in the RecyclerView item.
+     *
+     * @param listener The listener to be set.
+     */
     public void setOnButtonClickListener(OnButtonClickListener listener) {
         this.buttonClickListener = listener;
     }
 
+    // onBindViewHolder method: Binds data to the ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -64,6 +78,7 @@ public class PlatesAdapter extends RecyclerView.Adapter<PlatesAdapter.ViewHolder
         return plates.size();
     }
 
+    // ViewHolder class for the RecyclerView items
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         ConstraintLayout plateLayout;

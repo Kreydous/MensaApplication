@@ -1,7 +1,7 @@
 package com.mensaapplication.Models;
 
 import java.util.List;
-
+//Food model
 public class Food {
     int id;
     String name;

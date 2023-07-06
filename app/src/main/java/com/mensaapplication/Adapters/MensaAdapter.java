@@ -15,14 +15,21 @@ import com.mensaapplication.Models.Mensa;
 import com.mensaapplication.R;
 
 import java.util.List;
+/**
 
+ The MensaAdapter class is a RecyclerView adapter used to display a list of Mensa objects.
+ It binds the data to the ViewHolder and handles click events on the Mensa items.
+ */
 public class MensaAdapter extends RecyclerView.Adapter<MensaAdapter.ViewHolder> {
-    List<Mensa> mensas;
+    // MensaAdapter is a RecyclerView adapter used to display a list of Mensa objects
+
+    List<Mensa> mensas;// List of Mensa objects
     private OnButtonClickListener buttonClickListener;
     public MensaAdapter(List<Mensa> mensas) {
         this.mensas = mensas;
     }
 
+    // onCreateViewHolder method: Inflates the RecyclerView item layout
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,13 +37,17 @@ public class MensaAdapter extends RecyclerView.Adapter<MensaAdapter.ViewHolder> 
         return new ViewHolder(inflate);
     }
 
+    // Interface for button click listener
     public interface OnButtonClickListener {
         void onButtonClick(int position);
     }
 
+
     public void setOnButtonClickListener(OnButtonClickListener listener) {
         this.buttonClickListener = listener;
     }
+
+    // onBindViewHolder method: Binds data to the ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.mensaBtn.setText(mensas.get(position).getName());
@@ -54,11 +65,13 @@ public class MensaAdapter extends RecyclerView.Adapter<MensaAdapter.ViewHolder> 
         });
     }
 
+    // getItemCount method: Returns the number of items in the RecyclerView
     @Override
     public int getItemCount() {
         return mensas.size();
     }
 
+    // ViewHolder class for the RecyclerView items
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         Button mensaBtn;

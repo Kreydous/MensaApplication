@@ -25,6 +25,14 @@ import com.mensaapplication.Models.Food;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+
+ The MainActivity3 class is an activity that displays detailed information about a food plate.
+ It retrieves the plate ID from the intent, sends a request to the server to get the plate data,
+ and displays the plate information in a RecyclerView.
+ It also allows the user to give a rating to the plate and submit a review comment.
+ */
 public class MainActivity3 extends AppCompatActivity  implements View.OnClickListener {
     Food plate;
     ImageView star1,star2,star3,star4,star5;
@@ -44,9 +52,13 @@ public class MainActivity3 extends AppCompatActivity  implements View.OnClickLis
         star3.setOnClickListener(this);
         star4.setOnClickListener(this);
         star5.setOnClickListener(this);
+
+        // Get the plate ID from the intent
         String plateId = getIntent().getExtras().get("plateId").toString();
         TextView txtMeal = findViewById(R.id.plateName);
         String url = "https://mensaappserver.onrender.com/plate";
+        // Send a request to the server to retrieve the plate data
+
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -68,6 +80,7 @@ public class MainActivity3 extends AppCompatActivity  implements View.OnClickLis
         }){
             @Override
             protected Map<String,String> getParams(){
+                // Set the parameters for the POST request
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("plateId",plateId);
                 return params;
@@ -81,23 +94,16 @@ public class MainActivity3 extends AppCompatActivity  implements View.OnClickLis
                 )
         );
         Volley.newRequestQueue(this).add(request);
-//        Intent intent = getIntent();
-//
-//        String meal = intent.getStringExtra("MealName");
-//        TextView MealName = findViewById(R.id.plateName);
-//        MealName.setText(meal);
-//        ImageView Filter = findViewById(R.id.imageView8);
-//        int filter = intent.getIntExtra("Filter", 32);
-//        Filter.setImageResource(filter);
-//        ImageView Rating = findViewById(R.id.imageView10);
-//        int rating = intent.getIntExtra("Rating", 32);
-//        Rating.setImageResource(rating);
+
     }
 
+    /**
+     * Sets up the RecyclerView to display the plate information.
+     * Initializes the PlateInfoAdapter with the plate data,
+     * sets the adapter on the RecyclerView, and sets the layout manager.
+     */
     private void recyclerViewPlateInfo(){
         RecyclerView recyclerView = findViewById(R.id.recyclerView3);
-
-        //setUpMensaModels();
 
         PlateInfoAdapter adapter = new PlateInfoAdapter(plate);
         recyclerView.setAdapter(adapter);
@@ -109,6 +115,11 @@ public class MainActivity3 extends AppCompatActivity  implements View.OnClickLis
         setIntent(intent);
     }
 
+    /**
+     * Handles the click event when a view is clicked.
+     *
+     * @param v The clicked view.
+     */
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -127,6 +138,11 @@ public class MainActivity3 extends AppCompatActivity  implements View.OnClickLis
         giveRating(rating);
     }
 
+    /**
+     * Sends a request to the server to submit a rating and review comment for the plate.
+     *
+     * @param rating The rating given by the user.
+     */
     private void giveRating(int rating) {
         String comment = "";
         if(!txtComment.getEditText().getText().toString().isEmpty()){

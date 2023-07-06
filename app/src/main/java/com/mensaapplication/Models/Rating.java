@@ -1,5 +1,6 @@
 package com.mensaapplication.Models;
 
+//Rating model
 public class Rating {
 
     int id;

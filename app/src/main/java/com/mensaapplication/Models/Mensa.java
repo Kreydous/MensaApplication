@@ -2,6 +2,7 @@ package com.mensaapplication.Models;
 
 import java.util.List;
 
+//mensa model
 public class Mensa {
 
     int id;
